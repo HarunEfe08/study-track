@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Study Track</title>
+  <meta name="description" content="Çalışma sürelerini, günlük hedeflerini ve serini takip et.">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="manifest" href="tema/manifest.webmanifest">
+  <link rel="icon" href="tema/simge-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="tema/simge-192.png">
+
+  <link rel="stylesheet" href="css/stil.css">
+  <link rel="stylesheet" href="tema/tema.css">
+  <script src="tema/tema.js"></script>
+</head>
+<body>
+  <div class="arka-plan" aria-hidden="true"></div>
+
+  <nav class="menu" aria-label="Ana menü">
+    <a href="#/bugun" data-sayfa="bugun"><span aria-hidden="true">🏠</span><span>Bugün</span></a>
+    <a href="#/dersler" data-sayfa="dersler"><span aria-hidden="true">📚</span><span>Dersler</span></a>
+    <a href="#/gecmis" data-sayfa="gecmis"><span aria-hidden="true">🕘</span><span>Geçmiş</span></a>
+    <a href="#/rapor" data-sayfa="rapor"><span aria-hidden="true">📊</span><span>Rapor</span></a>
+    <a href="#/ayarlar" data-sayfa="ayarlar"><span aria-hidden="true">⚙️</span><span>Ayarlar</span></a>
+  </nav>
+
+  <main id="icerik" tabindex="-1"></main>
+
+  <footer class="alt-bilgi">
+    Study Track · verilerin yalnızca bu cihazda saklanır
+  </footer>
+
+  <div id="bildirimAlani" aria-live="polite"></div>
+
+  <dialog id="onayKutusu">
+    <form method="dialog">
+      <p id="onayMetni"></p>
+      <div class="dugme-sirasi">
+        <button value="iptal" class="dugme ikincil">Vazgeç</button>
+        <button value="evet" class="dugme tehlike" id="onayEvetDugmesi">Evet</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="formKutusu">
+    <form method="dialog" id="formKutusuForm">
+      <h2 id="formKutusuBaslik"></h2>
+      <div id="formKutusuAlanlar"></div>
+      <div class="dugme-sirasi">
+        <button value="iptal" class="dugme ikincil" formnovalidate>Vazgeç</button>
+        <button value="tamam" class="dugme">Kaydet</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/mantik.js"></script>
+  <script src="js/depolama.js"></script>
+  <script src="js/yardimcilar.js"></script>
+  <script src="js/ekranlar.js"></script>
+  <script src="js/uygulama.js"></script>
+</body>
+</html>

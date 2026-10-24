@@ -1,0 +1,66 @@
+:root {
+  --zemin: #f4f4fb;
+  --zemin-2: #e6e7fa;
+  --yuzey: rgba(255, 255, 255, 0.86);
+  --yuzey-hafif: rgba(79, 70, 229, 0.07);
+  --kenar: rgba(79, 70, 229, 0.18);
+  --yazi: #1d1b3a;
+  --yazi-soluk: #5a5880;
+  --vurgu: #4f46e5;
+  --vurgu-2: #7c3aed;
+  --ikincil: #6366f1;
+  --basari: #16a34a;
+  --tehlike: #dc2626;
+  --golge: 0 8px 26px rgba(55, 48, 163, 0.12);
+  --dugme-zemin: linear-gradient(135deg, #4f46e5, #7c3aed);
+  --dugme-yazi: #fff;
+  --dugme-golge: rgba(79, 70, 229, 0.28);
+  --halka-1: #4f46e5;
+  --halka-2: #a78bfa;
+  --basari-2: #86efac;
+  --girdi-zemin: #fff;
+  --girdi-ipucu: rgba(90, 88, 128, 0.6);
+  --iz: rgba(79, 70, 229, 0.12);
+  --tehlike-zemin: rgba(220, 38, 38, 0.08);
+  --tehlike-kenar: rgba(220, 38, 38, 0.45);
+  --karsilastirma: rgba(99, 102, 241, 0.4);
+  --perde: rgba(20, 18, 43, 0.45);
+  --alt-serit: rgba(255, 255, 255, 0.92);
+  --baslik-golge: none;
+  color-scheme: light;
+}
+.arka-plan { background: radial-gradient(1200px 600px at 15% -10%, #dcdcfb, transparent 60%), radial-gradient(900px 500px at 100% 0%, #eadcfb, transparent 55%), var(--zemin); }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --zemin: #14122b;
+    --zemin-2: #1f1c42;
+    --yuzey: rgba(34, 31, 70, 0.88);
+    --yuzey-hafif: rgba(255, 255, 255, 0.07);
+    --kenar: rgba(255, 255, 255, 0.14);
+    --yazi: #f1f0ff;
+    --yazi-soluk: #b9b6e0;
+    --vurgu: #a5b4fc;
+    --vurgu-2: #c4b5fd;
+    --ikincil: #818cf8;
+    --basari: #4ade80;
+    --tehlike: #f87171;
+    --golge: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --dugme-zemin: linear-gradient(135deg, #818cf8, #a78bfa);
+    --dugme-yazi: #14122b;
+    --dugme-golge: rgba(129, 140, 248, 0.3);
+    --halka-1: #818cf8;
+    --halka-2: #c4b5fd;
+    --basari-2: #bbf7d0;
+    --girdi-zemin: rgba(10, 8, 30, 0.5);
+    --girdi-ipucu: rgba(185, 182, 224, 0.6);
+    --iz: rgba(255, 255, 255, 0.12);
+    --tehlike-zemin: rgba(248, 113, 113, 0.14);
+    --tehlike-kenar: rgba(248, 113, 113, 0.5);
+    --karsilastirma: rgba(165, 180, 252, 0.5);
+    --perde: rgba(5, 3, 18, 0.7);
+    --alt-serit: rgba(20, 18, 43, 0.92);
+    color-scheme: dark;
+  }
+  .arka-plan { background: radial-gradient(1200px 600px at 15% -10%, #2b2766, transparent 60%), radial-gradient(900px 500px at 100% 0%, #3a2466, transparent 55%), var(--zemin); }
+}

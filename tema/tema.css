@@ -1,3 +1,4 @@
+/* Herkese açık tema: açık (varsayılan) ve koyu (sistem ayarına göre). Görsel yok, sistem yazı tipleri. */
 :root {
   --zemin: #f4f4fb;
   --zemin-2: #e6e7fa;
@@ -31,8 +32,10 @@
 }
 .arka-plan { background: radial-gradient(1200px 600px at 15% -10%, #dcdcfb, transparent 60%), radial-gradient(900px 500px at 100% 0%, #eadcfb, transparent 55%), var(--zemin); }
 
+/* Koyu tema iki yerde tanımlı: sistem koyuysa (ve kullanıcı "Açık" seçmediyse) ve kullanıcı elle "Koyu" seçtiyse.
+   Renkleri değiştirirsen ikisini de değiştir. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-tema="acik"]) {
     --zemin: #14122b;
     --zemin-2: #1f1c42;
     --yuzey: rgba(34, 31, 70, 0.88);
@@ -62,5 +65,37 @@
     --alt-serit: rgba(20, 18, 43, 0.92);
     color-scheme: dark;
   }
-  .arka-plan { background: radial-gradient(1200px 600px at 15% -10%, #2b2766, transparent 60%), radial-gradient(900px 500px at 100% 0%, #3a2466, transparent 55%), var(--zemin); }
+  :root:not([data-tema="acik"]) .arka-plan { background: radial-gradient(1200px 600px at 15% -10%, #2b2766, transparent 60%), radial-gradient(900px 500px at 100% 0%, #3a2466, transparent 55%), var(--zemin); }
 }
+
+:root[data-tema="koyu"] {
+  --zemin: #14122b;
+  --zemin-2: #1f1c42;
+  --yuzey: rgba(34, 31, 70, 0.88);
+  --yuzey-hafif: rgba(255, 255, 255, 0.07);
+  --kenar: rgba(255, 255, 255, 0.14);
+  --yazi: #f1f0ff;
+  --yazi-soluk: #b9b6e0;
+  --vurgu: #a5b4fc;
+  --vurgu-2: #c4b5fd;
+  --ikincil: #818cf8;
+  --basari: #4ade80;
+  --tehlike: #f87171;
+  --golge: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --dugme-zemin: linear-gradient(135deg, #818cf8, #a78bfa);
+  --dugme-yazi: #14122b;
+  --dugme-golge: rgba(129, 140, 248, 0.3);
+  --halka-1: #818cf8;
+  --halka-2: #c4b5fd;
+  --basari-2: #bbf7d0;
+  --girdi-zemin: rgba(10, 8, 30, 0.5);
+  --girdi-ipucu: rgba(185, 182, 224, 0.6);
+  --iz: rgba(255, 255, 255, 0.12);
+  --tehlike-zemin: rgba(248, 113, 113, 0.14);
+  --tehlike-kenar: rgba(248, 113, 113, 0.5);
+  --karsilastirma: rgba(165, 180, 252, 0.5);
+  --perde: rgba(5, 3, 18, 0.7);
+  --alt-serit: rgba(20, 18, 43, 0.92);
+  color-scheme: dark;
+}
+:root[data-tema="koyu"] .arka-plan { background: radial-gradient(1200px 600px at 15% -10%, #2b2766, transparent 60%), radial-gradient(900px 500px at 100% 0%, #3a2466, transparent 55%), var(--zemin); }

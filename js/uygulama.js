@@ -151,6 +151,12 @@ const Uygulama = {
     Uygulama.yenile();
   },
 
+  temaDegistir: function (secim) {
+    Depolama.temaKaydet(secim);
+    secimiUygula();
+    Uygulama.yenile();
+  },
+
   hepsiniSil: function () {
     Depolama.sil();
     Uygulama.durum = Mantik.varsayilanVeri(window.TEMA);
@@ -186,7 +192,7 @@ function temayiUygula() {
   const tema = window.TEMA || {};
   if (tema.siteAdi) document.title = tema.siteAdi;
 
-  // ana ekran görseli sadece temada varsa eklenir 
+  // ana ekran görseli sadece temada varsa eklenir (herkese açık sürümde yok)
   if (tema.anaGorsel) {
     const hero = document.createElement("header");
     hero.className = "hero";
@@ -203,14 +209,31 @@ function temayiUygula() {
     document.querySelector('.menu a[data-sayfa="bugun"] span').textContent = tema.menuSimgesi;
   }
 
-  if (tema.tarayiciRengi) {
-    let renk = tema.tarayiciRengi;
-    if (typeof renk !== "string") {
-      const koyuMu = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      renk = koyuMu ? renk.koyu : renk.acik;
-    }
-    document.querySelector('meta[name="theme-color"]').setAttribute("content", renk);
+  if (tema.temaSecimi) secimiUygula();
+  tarayiciRenginiAyarla();
+}
+
+// Kayıtlı tema seçimini <html data-tema="..."> olarak yazar. Otomatikse özelliği kaldırır, css sistem ayarına bakar.
+function secimiUygula() {
+  const secim = Depolama.temaOku();
+  if (secim === "otomatik") document.documentElement.removeAttribute("data-tema");
+  else document.documentElement.dataset.tema = secim;
+  tarayiciRenginiAyarla();
+}
+
+// tarayıcı rengi tek renk olabilir ya da { acik, koyu } verilebilir
+function tarayiciRenginiAyarla() {
+  const tema = window.TEMA || {};
+  if (!tema.tarayiciRengi) return;
+  let renk = tema.tarayiciRengi;
+  if (typeof renk !== "string") {
+    const secim = tema.temaSecimi ? Depolama.temaOku() : "otomatik";
+    let koyuMu = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (secim === "koyu") koyuMu = true;
+    if (secim === "acik") koyuMu = false;
+    renk = koyuMu ? renk.koyu : renk.acik;
   }
+  document.querySelector('meta[name="theme-color"]').setAttribute("content", renk);
 }
 
 function baslat() {

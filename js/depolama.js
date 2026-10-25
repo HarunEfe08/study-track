@@ -3,6 +3,7 @@
 
 const ANAHTAR = "studytrack:veri";
 const SAYAC_ANAHTARI = "studytrack:sayac";
+const TEMA_ANAHTARI = "studytrack:tema"; // "acik", "koyu" ya da hiç yok (= otomatik)
 
 const Depolama = {
   // Kayıtlı veriyi getirir. Yoksa boş veri verir.
@@ -25,7 +26,7 @@ const Depolama = {
         return { veri: sonuc.veri, uyari: uyari };
       }
     } catch (e) {
-      // JSON bozuk,
+      // JSON bozuk, aşağıda yedeklenecek
     }
 
     try {
@@ -68,12 +69,32 @@ const Depolama = {
     }
   },
 
+  // Tema seçimi verinin içinde değil, ayrı duruyor: yedeğe girmesin, cihaza özel olsun.
+  temaOku: function () {
+    try {
+      const t = localStorage.getItem(TEMA_ANAHTARI);
+      return t === "acik" || t === "koyu" ? t : "otomatik";
+    } catch (e) {
+      return "otomatik";
+    }
+  },
+
+  temaKaydet: function (secim) {
+    try {
+      if (secim === "acik" || secim === "koyu") localStorage.setItem(TEMA_ANAHTARI, secim);
+      else localStorage.removeItem(TEMA_ANAHTARI);
+    } catch (e) {
+      // önemli değil
+    }
+  },
+
   sayaciKaydet: function (sayac) {
     try {
       if (sayac) localStorage.setItem(SAYAC_ANAHTARI, JSON.stringify(sayac));
       else localStorage.removeItem(SAYAC_ANAHTARI);
     } catch (e) {
-      
+      // önemli değil
     }
   }
 };
+

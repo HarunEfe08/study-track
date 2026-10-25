@@ -32,6 +32,7 @@ time.sleep(1)
 def sayfa_ac(tarayici, genislik, yukseklik, ad):
     baglam = tarayici.new_context(viewport={"width": genislik, "height": yukseklik}, locale="tr-TR",
                                   timezone_id="Europe/Istanbul", accept_downloads=True)
+    # Dış ağ (Google Fonts) sandbox'ta yok; engelle ki sayfa beklemesin
     baglam.route("**/*", lambda r: r.continue_() if r.request.url.startswith(f"http://localhost:{PORT}") else r.abort())
     sayfa = baglam.new_page()
     sayfa.on("pageerror", lambda e: hatalar.append(f"[{ad}] pageerror: {e}"))
@@ -107,6 +108,19 @@ try:
         kontrol("günlük hedef kaydedildi", "kaydedildi" in toast(s))
         s.fill("#aAd", "Deniz")
         s.click('form:has(#aAd) button[type="submit"]')
+        if tema.get("temaSecimi"):
+            s.click('[data-tema-secimi="koyu"]')
+            kontrol("Koyu seçilince tema koyu oluyor", s.evaluate("document.documentElement.dataset.tema") == "koyu")
+            koyu_zemin = s.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--zemin').trim()")
+            s.click('[data-tema-secimi="acik"]')
+            acik_zemin = s.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--zemin').trim()")
+            kontrol("Açık ve koyu zemin rengi farklı", koyu_zemin != acik_zemin, koyu_zemin + " / " + acik_zemin)
+            s.reload()
+            s.wait_for_selector("h1")
+            kontrol("Tema seçimi yenilemeden sonra kalıyor", s.evaluate("document.documentElement.dataset.tema") == "acik")
+            s.click('.menu a[data-sayfa="ayarlar"]')
+            s.click('[data-tema-secimi="otomatik"]')
+            kontrol("Otomatik seçilince özellik kalkıyor", s.evaluate("document.documentElement.dataset.tema") is None)
         s.wait_for_timeout(200)
         s.screenshot(path=f"{CIKTI}/02-masaustu-ayarlar.png", full_page=True)
 

@@ -1,4 +1,5 @@
-// Bugün, Dersler, Geçmiş, Rapor, Ayarlar.
+// 5 ekran burada: Bugün, Dersler, Geçmiş, Rapor, Ayarlar.
+// Her biri bir element döndürüyor, ekrana koymayı uygulama.js yapıyor.
 
 const Ekranlar = {
   sonDers: null,          // en son seçilen ders, form yenilenince hatırlansın
@@ -62,7 +63,7 @@ function sayaciCiz(kap, dersSecimi) {
     return;
   }
 
-  // sayaç çalışırken ders silinmişse
+  // sayaç çalışırken ders silinmiş olabilir
   let ders = null;
   for (let i = 0; i < Uygulama.durum.dersler.length; i++) {
     if (Uygulama.durum.dersler[i].id === sayac.dersId) ders = Uygulama.durum.dersler[i];
@@ -601,6 +602,26 @@ Ekranlar.ayarlar = function () {
       }
     }, "Tüm verileri sil"));
 
+  // görünüm (açık / koyu / otomatik), sadece temada izin verilmişse
+  let gorunumKarti = null;
+  if (window.TEMA && window.TEMA.temaSecimi) {
+    const secili = Depolama.temaOku();
+    const secenekler = [["otomatik", "🖥 Otomatik"], ["acik", "☀️ Açık"], ["koyu", "🌙 Koyu"]];
+    const dugmeler = [];
+    for (let i = 0; i < secenekler.length; i++) {
+      const anahtar = secenekler[i][0];
+      dugmeler.push(el("button", {
+        type: "button", sinif: "dugme kucuk " + (anahtar === secili ? "" : "ikincil"), "aria-pressed": anahtar === secili,
+        "data-tema-secimi": anahtar,
+        onClick: function () { Uygulama.temaDegistir(anahtar); }
+      }, secenekler[i][1]));
+    }
+    gorunumKarti = el("section", { sinif: "kart" },
+      el("h2", {}, "Görünüm"),
+      el("p", { sinif: "soluk kucuk" }, "Otomatik seçersen cihazının açık/koyu ayarı kullanılır."),
+      el("div", { sinif: "dugme-sirasi sola" }, dugmeler));
+  }
+
   // tarayıcı izin verdiyse "uygulamayı yükle" kartı
   let kurulum = null;
   if (Uygulama.kurulumIstemi) {
@@ -630,6 +651,6 @@ Ekranlar.ayarlar = function () {
     el("h1", {}, "Ayarlar"),
     el("section", { sinif: "kart" }, el("h2", {}, "Günlük hedef"), hedefFormu),
     el("section", { sinif: "kart" }, el("h2", {}, "Profil"), profilFormu),
-    veriKarti, kurulum,
+    gorunumKarti, veriKarti, kurulum,
     el("p", { sinif: "soluk kucuk orta" }, siteAdi + " · v" + Uygulama.SURUM, gizlilik));
 };

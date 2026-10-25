@@ -4,6 +4,8 @@
 
 Çalışma sürelerini kaydetmek, günlük hedefler belirlemek, ilerlemeyi gözlemlemek ve ders çalışma alışkanlığını sürdürülebilir hâle getirmek için tasarlandı. Projeyi geliştirirken yalnızca çalışan bir uygulama ortaya çıkarmayı değil, aynı zamanda yazılım geliştirme sürecinde yeni şeyler öğrenmeyi ve öğrendiklerimi pratiğe dökmeyi de hedefledim.
 
+🌐 **Canlı demo:** https://harunefe08.github.io/study-track/
+
 ## ✨ Neler Yapabiliyor?
 
 - 📖 **Ders yönetimi:** Ders ekleme, düzenleme ve silme.
